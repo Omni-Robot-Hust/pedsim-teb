@@ -1,0 +1,20 @@
+<launch>
+
+  <!-- run environment from pedsim -->
+  <include file="$(find pedsim_simulator)/launch/simple_pedestrians.launch">
+    <arg name="visualize" default="true"/>  <!-- hide default Rviz -->
+    <arg name="simulation_factor" value="3.0"/> <!-- Speed up -->
+  </include>
+
+  <!-- Rviz -->
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find pedsim_simulator)/config/pedsim_teb.rviz"/> -->
+
+  <include file="$(find pedsim_sensors)/launch/occlusion_pcd_sensor.launch">
+    <arg name="origin_x" value="0.0"/>
+    <arg name="origin_y" value="0.0"/>
+    <arg name="range" value="10.0"/>
+  </include>
+
+  <!-- navigation stack - move_base -->
+  <include file="$(find pedsim_simulator)/launch/teb.launch"/>
+</launch>
